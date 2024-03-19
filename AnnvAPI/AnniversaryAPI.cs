@@ -13,8 +13,8 @@ namespace Croffle.AnnvAPI
 
     internal class AnniversaryAPI
     {
-        [DllImport("Croffles.dll")]
-        public static extern int GetApiKey([MarshalAs(UnmanagedType.IUnknown)] out string apiKey);
+        [DllImport("CroffleDll.dll")]
+        public static extern int GetApiKey([MarshalAs(UnmanagedType.LPStr)] out string apiKey);
 
 
         private string apiKey = "";
@@ -31,8 +31,17 @@ namespace Croffle.AnnvAPI
             sqldb = new SQLiteDB();
 
             Console.WriteLine(GetApiKey(out apiKey));
+            Console.WriteLine(apiKey);
 
-            sqldb.Initialize("annv", AnnvStruct());
+            //sqldb.Initialize("annv", AnnvStruct());
+        }
+
+        public void CheckNormal()
+        {
+            if (apiconn.GetAnniversaryUrl(out string url, apiKey, 1, 10, DateTime.Today.Year, DateTime.Today.Month) == 1) Console.WriteLine("Get URL : NORMAL");
+            else Console.WriteLine("Get URL : ERROR");
+            if (apiconn.GetResultXML(url, out string result) == 1) Console.WriteLine("Get XML : NORMAL");
+            else Console.WriteLine("Get XML : ERROR");
         }
         
         internal void SetEveryAnniversaryOnDB(int year, int month)
@@ -77,8 +86,7 @@ SELECT date('{locdate:yyyy-MM-dd}'), {isHoliday}, '{item["dateName"].InnerText}'
                 sqldb.SQL_Modify(sql);
             }
         }
-
-
+        
         private string AnnvStruct()
         {
             string table_struct = @"
