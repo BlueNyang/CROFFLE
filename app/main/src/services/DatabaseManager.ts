@@ -4,6 +4,7 @@ import { app } from 'electron';
 import { Tag } from '../core/tags/model/Tag';
 import { Schedule } from '../core/schedules/model/Schedule';
 import { PluginInfo } from '../core/plugin-info/model/PluginInfo';
+import { PluginStorage } from '../core/plugin-data/model/PluginStorage';
 
 class DatabaseManager {
   private dataSource: DataSource;
@@ -16,7 +17,7 @@ class DatabaseManager {
     this.dataSource = new DataSource({
       type: 'sqlite',
       database: dbPath,
-      entities: [Tag, Schedule, PluginInfo],
+      entities: [Tag, Schedule, PluginInfo, PluginStorage],
       synchronize: process.env.NODE_ENV === 'development',
       logging: process.env.NODE_ENV === 'development',
     });
