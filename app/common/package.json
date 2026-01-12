@@ -5,10 +5,9 @@
   "license": "ISC",
   "author": "Croffle Dev.",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
-  }
+  "main": "",
+  "types": "src/index.d.ts",
+  "files": [
+    "src"
+  ]
 }

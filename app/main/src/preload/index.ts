@@ -6,20 +6,19 @@ import { settingsApi } from './api/settings.api';
 import { scheduleApi } from './api/schedule.api';
 import { pluginStorageApi } from './api/pluginStorage.api';
 
-const electronAPI = {
-  ...windowApi,
-  ...tagApi,
-  ...pluginInfoApi,
-  ...settingsApi,
-  ...scheduleApi,
+const baseAPI = {
+  windows: windowApi,
+  tags: tagApi,
+  schedules: scheduleApi,
+  pluginInfo: pluginInfoApi,
+  settings: settingsApi,
 };
 
-const appApi = {
-  ...pluginStorageApi,
+const appAPI = {
+  storage: pluginStorageApi,
 };
 
-export type ElectronAPI = typeof electronAPI;
-export type AppAPI = typeof appApi;
-
-contextBridge.exposeInMainWorld('electronAPI', electronAPI);
-contextBridge.exposeInMainWorld('appApi', appApi);
+contextBridge.exposeInMainWorld('croffle', {
+  base: baseAPI,
+  app: appAPI,
+});

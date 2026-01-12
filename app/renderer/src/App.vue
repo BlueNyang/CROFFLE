@@ -4,15 +4,15 @@
   import { Toaster } from '@/components/ui/sonner';
   import { Minus, Square, X } from 'lucide-vue-next';
 
-  // Electron 윈도우 제어
+  // Electron 윈도우 제어 함수
   const minimizeWindow = async () => {
-    await window.electronAPI?.minimize();
+    croffle.base.windows.minimize();
   };
   const maximizeWindow = async () => {
-    await window.electronAPI?.maximize();
+    croffle.base.windows.maximize();
   };
   const closeWindow = async () => {
-    await window.electronAPI?.close();
+    croffle.base.windows.close();
   };
 </script>
 

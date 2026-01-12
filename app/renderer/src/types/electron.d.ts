@@ -1,9 +1,14 @@
-import type { ElectronAPI } from '@croffledev/croffle/src/preload';
+import type { base, app } from 'croffle';
 
 // 전역 타입 선언
 declare global {
+  const croffle: {
+    readonly base: typeof base;
+    readonly app: typeof app;
+  };
+
   interface Window {
-    electronAPI: ElectronAPI;
+    readonly croffle: typeof croffle;
   }
 }
 
