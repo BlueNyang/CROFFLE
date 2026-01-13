@@ -1,7 +1,36 @@
-import { AppSettings, DEFAULT_SETTINGS } from '@croffledev/croffle-common';
+import {
+  AppSettingLanguage,
+  AppSettings,
+  AppSettingStartupBehavior,
+  AppSettingTheme,
+  CalendarTimeFormat,
+  CalendarView,
+  CalendarWeekStartDay,
+} from 'croffle';
 import { app } from 'electron';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
+
+const DEFAULT_SETTINGS: AppSettings = {
+  general: {
+    language: AppSettingLanguage.EN,
+    theme: AppSettingTheme.SYSTEM,
+    autoUpdate: true,
+    startupBehavior: AppSettingStartupBehavior.OPEN_LAST_SESSION,
+    startOnSystemBoot: false,
+    startMinimized: false,
+  },
+  calendar: {
+    defaultView: CalendarView.MONTH,
+    weekStartDay: CalendarWeekStartDay.SUNDAY,
+    showWeekNumbers: false,
+    timeFormat: CalendarTimeFormat.H24,
+  },
+  notifications: {
+    enabled: true,
+    defaultReminderMinutes: 10,
+  },
+};
 
 class SettingService {
   private settings: AppSettings;

@@ -108,9 +108,10 @@ declare module 'croffle' {
   }
 
   export namespace schedules {
-    export function get(id: string): Promise<Schedule | null>;
-    export function getAll(): Promise<Schedule[]>;
+    export function getAll(period: { start: string; end: string }): Promise<Schedule[]>;
     export function create(data: Partial<Schedule>): Promise<Schedule>;
+    export function update(id: string, data: Partial<Schedule>): Promise<Schedule>;
+    export function remove(id: string): Promise<boolean>;
   }
 
   export namespace pluginInfo {

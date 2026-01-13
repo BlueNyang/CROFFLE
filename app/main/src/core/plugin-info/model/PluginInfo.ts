@@ -18,5 +18,5 @@ export class PluginInfo {
   description?: string;
 
   @Column({ default: false })
-  isEnabled: boolean;
+  enabled: boolean;
 }

@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import { PluginInfo } from '../../core/plugin-info/model/PluginInfo';
+import { PluginInfo } from 'croffle';
 import { PluginInfoAPI } from '../../ipc/pluginInfo.handler';
 
 export const pluginInfoApi = {

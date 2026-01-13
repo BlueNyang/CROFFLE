@@ -15,7 +15,7 @@ export const pluginService = {
     const repo = databaseManager.getRepository(PluginInfo);
     return repo.find({
       where: {
-        isEnabled: true,
+        enabled: true,
       },
       order: {
         name: 'ASC',
@@ -50,7 +50,7 @@ export const pluginService = {
     if (!plugin) {
       throw new Error(`Plugin "${name}" not found.`);
     }
-    plugin.isEnabled = enable;
+    plugin.enabled = enable;
     return repo.save(plugin);
   },
 

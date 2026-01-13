@@ -1,26 +1,30 @@
 import { ipcMain } from 'electron';
 import { pluginService } from '../core/plugin-info/service/PluginInfoService';
-import { PluginInfo } from '../core/plugin-info/model/PluginInfo';
+import { PluginInfo } from 'croffle';
 import {
   validatePluginInstallation,
   validatePluginName,
   validatePluginToggle,
 } from '../core/helper/pluginValidator';
+import { PluginInfoMapper } from '../core/plugin-info/mapper/PluginInfoMapper';
 
 export const registerPluginInfoIpcHandlers = (): void => {
   ipcMain.handle('pluginInfo:getInstalledPlugins', async (): Promise<PluginInfo[]> => {
-    return pluginService.getInstalledPlugins();
+    const entity = await pluginService.getInstalledPlugins();
+    return entity.map(PluginInfoMapper.toInterface);
   });
 
   ipcMain.handle('pluginInfo:getEnabledPlugins', async (): Promise<PluginInfo[]> => {
-    return pluginService.getEnabledPlugins();
+    const entity = await pluginService.getEnabledPlugins();
+    return entity.map(PluginInfoMapper.toInterface);
   });
 
   ipcMain.handle(
     'pluginInfo:getPluginByName',
     async (_, name: string): Promise<PluginInfo | null> => {
       validatePluginName(name);
-      return pluginService.getPluginByName(name);
+      const entity = await pluginService.getPluginByName(name);
+      return entity ? PluginInfoMapper.toInterface(entity) : null;
     }
   );
 
@@ -34,7 +38,8 @@ export const registerPluginInfoIpcHandlers = (): void => {
         throw new Error(`Plugin with name "${pluginData.name}" is already installed.`);
       }
 
-      return pluginService.installPlugin(pluginData);
+      const entity = await pluginService.installPlugin(pluginData);
+      return PluginInfoMapper.toInterface(entity);
     }
   );
 
@@ -42,7 +47,8 @@ export const registerPluginInfoIpcHandlers = (): void => {
     'pluginInfo:togglePlugin',
     async (_, name: string, enable: boolean): Promise<PluginInfo | null> => {
       validatePluginToggle(name, enable);
-      return pluginService.togglePlugin(name, enable);
+      const entity = await pluginService.togglePlugin(name, enable);
+      return entity ? PluginInfoMapper.toInterface(entity) : null;
     }
   );
 
