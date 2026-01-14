@@ -57,12 +57,3 @@ export const registerPluginInfoIpcHandlers = (): void => {
     return pluginService.uninstallPlugin(name);
   });
 };
-
-export interface PluginInfoAPI {
-  getInstalledPlugins: () => Promise<PluginInfo[]>;
-  getEnabledPlugins: () => Promise<PluginInfo[]>;
-  getPluginByName: (name: string) => Promise<PluginInfo | null>;
-  installPlugin: (pluginData: Partial<PluginInfo>) => Promise<PluginInfo>;
-  togglePlugin: (name: string, enable: boolean) => Promise<PluginInfo | null>;
-  uninstallPlugin: (name: string) => Promise<boolean>;
-}

@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
 import { settingService } from '../core/settings/service/SettingService';
-import { AppSettings } from '@croffledev/croffle-common';
+import { AppSettings } from 'croffle';
 
 export const registerSettingsIpcHandlers = (): void => {
   ipcMain.handle('settings:getAll', async (): Promise<AppSettings> => {
@@ -25,9 +25,3 @@ export const registerSettingsIpcHandlers = (): void => {
     }
   );
 };
-
-export interface SettingsAPI {
-  getAll: () => Promise<AppSettings>;
-  getOf: (key: string) => Promise<AppSettings[keyof AppSettings]>;
-  update: (partialSettings: Partial<AppSettings>) => Promise<AppSettings>;
-}

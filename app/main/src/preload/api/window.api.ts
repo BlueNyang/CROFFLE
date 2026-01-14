@@ -1,5 +1,7 @@
 import { ipcRenderer } from 'electron';
-import { WindowAPI } from '../../ipc/window.handler';
+import { windows } from 'croffle';
+
+type WindowAPI = typeof windows;
 
 export const windowApi = {
   // 윈도우 제어

@@ -1,6 +1,7 @@
-import { AppSettings } from '@croffledev/croffle-common';
+import { AppSettings, settings } from 'croffle';
 import { ipcRenderer } from 'electron';
-import { SettingsAPI } from '../../ipc/settings.handler';
+
+type SettingsAPI = typeof settings;
 
 export const settingsApi = {
   getAll: async (): Promise<AppSettings> => {

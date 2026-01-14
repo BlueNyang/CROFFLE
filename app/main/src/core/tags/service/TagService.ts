@@ -11,13 +11,13 @@ export const tagService = {
     return tags;
   },
 
-  getByName: async (name: string): Promise<Tag | null> => {
+  getTagByName: async (name: string): Promise<Tag | null> => {
     const tagRepo = databaseManager.getRepository(Tag);
     const tag = await tagRepo.findOneBy({ name });
     return tag;
   },
 
-  addTag: async (name: string, color: string): Promise<Tag> => {
+  createTag: async (name: string, color: string): Promise<Tag> => {
     const tagRepo = databaseManager.getRepository(Tag);
 
     if (!stringValidation(name, false, 50, 1)) {
@@ -38,7 +38,7 @@ export const tagService = {
     return newTag;
   },
 
-  modTag: async (id: string, name: string, color: string): Promise<Tag> => {
+  modifyTag: async (id: string, name: string, color: string): Promise<Tag> => {
     const tagRepo = databaseManager.getRepository(Tag);
     const tag = await tagRepo.findOneBy({ id });
     if (!tag) throw new Error('Tag not found');
@@ -62,7 +62,7 @@ export const tagService = {
     return tag;
   },
 
-  delTag: async (id: string): Promise<boolean> => {
+  removeTag: async (id: string): Promise<boolean> => {
     const tagRepo = databaseManager.getRepository(Tag);
     const tag = await tagRepo.findOneBy({ id });
     if (!tag) throw new Error('Tag not found');

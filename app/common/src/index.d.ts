@@ -94,9 +94,12 @@ declare module 'croffle' {
   }
 
   export namespace windows {
-    export function minimize(): void;
-    export function maximize(): void;
-    export function close(): void;
+    export function minimize(): Promise<void>;
+    export function maximize(): Promise<void>;
+    export function close(): Promise<void>;
+    export function exitApp(): Promise<void>;
+    export function checkForUpdates(): Promise<void>;
+    export function setCloseToTrayMode(enabled: boolean): Promise<void>;
   }
 
   export namespace tags {
@@ -124,14 +127,14 @@ declare module 'croffle' {
   }
 
   export namespace settings {
-    export function get(): Promise<AppSettings>;
+    export function getAll(): Promise<AppSettings>;
+    export function getOf(key: string): Promise<AppSettings[keyof AppSettings]>;
     export function update(newSettings: Partial<AppSettings>): Promise<AppSettings>;
   }
 
   export namespace pluginStorage {
     export function get(pluginId: string, key: string): Promise<string | null>;
     export function set(pluginId: string, key: string, value: string): Promise<void>;
-    export function remove(pluginId: string, key: string): Promise<void>;
   }
 
   export const base: {

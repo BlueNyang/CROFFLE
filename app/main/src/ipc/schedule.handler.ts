@@ -35,10 +35,3 @@ export const registerScheduleIpcHandlers = (): void => {
     return await scheduleService.deleteSchedule(id);
   });
 };
-
-export interface ScheduleApi {
-  getSchedules(period: { start: string; end: string }): Promise<Schedule[]>;
-  createSchedule(data: Partial<Schedule>): Promise<Schedule>;
-  updateSchedule(id: string, data: Partial<Schedule>): Promise<Schedule>;
-  deleteSchedule(id: string): Promise<boolean>;
-}
